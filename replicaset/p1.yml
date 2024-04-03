@@ -1,0 +1,19 @@
+apiVersion: app/v1
+kind: ReplicaSet
+metadata:
+  name: nginx
+sepc:
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: nginx
+  
+  # 실행될 pod
+  template:
+    metadata:
+      labels:
+        app: nginx  #라벨 지정
+    spec:  # 실행할것
+      containers:
+        - name: nginx
+          image: nginx:latest

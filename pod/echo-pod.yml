@@ -1,0 +1,10 @@
+appVersion: v1
+kind: Pod
+metatdata:
+  name: echo
+  labels:
+    app: echo
+spec:
+  containers:
+    - name: app
+      image: ghcr.io/subicura/echo:v1

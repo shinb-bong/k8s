@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: echo-rs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: echo
+      tier: app
+  # template을 자세히 보니 이전에 본 Pod 설정 파일과 완전히 동일한 것을 알 수 있습니다.
+  template:
+    metadata:
+      labels:
+        app: echo
+        tier: app
+    spec:
+      containers:
+        - name: echo
+          image: ghcr.io/subicura/echo:v1
