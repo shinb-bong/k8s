@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: counter-lb
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 30000
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    app: counter
+    tier: app
+
+# LoadBalancer는 NodePort의 기능을 기본으로 포함합니다.
