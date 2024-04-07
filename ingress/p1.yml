@@ -1,0 +1,46 @@
+apiVersion: networking.k8s.io/v1 
+kind: Ingress
+metadata:
+  name: nginx
+spec:
+  rules:
+    - host: nginx.127.0.0.1.sslip.io # 도메인과 연결하고
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+              name: nginx
+              port:
+                number: 80 # 고정된 IP 와 일치
+---
+apiVersion: apps/v1
+kind: Deployment # 서비스를 배포하고
+metadata:
+  name: nginx
+spec:
+  replicas: 3
+  seletor:
+    matchLables:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: echo
+          image: nginx:latest
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  ports:
+    - port: 80 # 고정된 IP를 통해 접근
+      protocol: TCP 
+  selector:
+    app: nginx

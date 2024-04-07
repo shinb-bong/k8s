@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alpine-env
+spec:
+  containers:
+    - name: alpine
+      image: alpine
+      command: ["sleep"]
+      args: [ "100000"]
+      env: 
+        - name: hello
+          valueFrom: # 바로 적용하기
+            configMapKeyRef:
+              name: my-config
+              key: hello

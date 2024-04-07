@@ -1,0 +1,1 @@
+위 샘플은 example.com, subicura.com/blog, subicura.com/help 주소로 서로 다른 서비스에 접근하는 모습입니다. 80(http) 또는 443(https) 포트로 여러 개의 서비스를 연결해야 하는데 이럴 때 Ingress를 사용합니다.
