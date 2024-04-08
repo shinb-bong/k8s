@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jpashop-k8s
+spec:
+  selector:
+    matchLabels:
+      app: jpashop
+  replicas: 1
+
+  template:
+    metadata:
+      labels:
+        app: jpashop
+    spec:
+      containers:
+        - name: core
+          image: daoh98/sample:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1000Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jpashop-service
+spec:
+  type: NodePort 
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: jpashop
+
+
